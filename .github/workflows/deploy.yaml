@@ -25,3 +25,5 @@ jobs:
 
     - name: Deploy
       uses: DefangLabs/defang-github-action@v1.1.0
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }} # Add your Hugging Face token here
