@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - main
+      - main  # Triggers deployment on pushes to the main branch
 
 jobs:
   deploy:
@@ -14,7 +14,18 @@ jobs:
 
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4  # Check out the repository
+
+    - name: Setup Python
+      uses: actions/setup-python@v4  # Sets up Python environment
+      with:
+        python-version: '3.x'  # Specify your Python version
+
+    - name: Install Dependencies
+      run: |
+        pip install defang  # Install Defang CLI dependencies
 
     - name: Deploy
-      uses: DefangLabs/defang-github-action@v1.1.0
+      uses: DefangLabs/defang-github-action@v1.1.0  # Defang action for deployment
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}  # Hugging Face token from GitHub Secrets
